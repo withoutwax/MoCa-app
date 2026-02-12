@@ -1,20 +1,5 @@
 {
-  "expo": {
-    "name": "moca-app",
-    "slug": "moca-app",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "userInterfaceStyle": "light",
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {},
-    "web": {},
-    "plugins": [
-      "expo-asset"
-    ]
-  }
+  "plugins": [
+    "expo-asset"
+  ]
 }
