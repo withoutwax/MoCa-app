@@ -1,20 +1,51 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useEffect } from "react";
+import LoginScreen from "./src/screens/LoginScreen";
+import SignupScreen from "./src/screens/SignupScreen";
+import { useAuthStore } from "./src/store/useAuthStore";
+import { StyleSheet } from "react-native"; // Added this import
+
+const Stack = createNativeStackNavigator();
+
+function AuthNavigator() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Signup" component={SignupScreen} />
+    </Stack.Navigator>
+  );
+}
+
+import BottomTabNavigator from "./src/navigation/BottomTabNavigator";
+
+function MainNavigator() {
+  return <BottomTabNavigator />;
+}
 
 export default function App() {
+  const { isLoggedIn, restoreSession } = useAuthStore();
+
+  useEffect(() => {
+    restoreSession();
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      {isLoggedIn ? <MainNavigator /> : <AuthNavigator />}
+    </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 20,
   },
 });
