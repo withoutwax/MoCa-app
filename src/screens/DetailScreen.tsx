@@ -130,15 +130,8 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 20,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    marginTop: -20,
     backgroundColor: "white",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 5,
+    // Removed sheet-like styling
   },
   name: {
     fontSize: 28,
@@ -162,7 +155,7 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start", // Changed from center to flex-start
     marginBottom: 15,
   },
   icon: {
