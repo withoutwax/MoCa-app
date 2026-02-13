@@ -21,8 +21,19 @@ function AuthNavigator() {
 
 import BottomTabNavigator from "./src/navigation/BottomTabNavigator";
 
+import DetailScreen from "./src/screens/DetailScreen";
+
 function MainNavigator() {
-  return <BottomTabNavigator />;
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="MainTabs"
+        component={BottomTabNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name="Detail" component={DetailScreen} />
+    </Stack.Navigator>
+  );
 }
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

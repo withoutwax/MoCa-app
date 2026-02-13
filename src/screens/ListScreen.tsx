@@ -14,7 +14,10 @@ import { getCards } from "../api/cards";
 
 // const API_URL = 'http://localhost:3000/cards'; // Base URL
 
+import { useNavigation } from "@react-navigation/native";
+
 export default function ListScreen() {
+  const navigation = useNavigation();
   // 1. Connect to SSE
   useNotificationSource();
 
@@ -51,7 +54,12 @@ export default function ListScreen() {
         data={cards}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <View style={styles.card}>
+          <TouchableOpacity
+            style={styles.card}
+            onPress={() =>
+              (navigation as any).navigate("Detail", { cardId: item.id })
+            }
+          >
             <Image source={{ uri: item.imageUrl }} style={styles.cardImage} />
             <View style={styles.cardContent}>
               {item.status === "PENDING" || item.status === "PROCESSING" ? (
@@ -67,7 +75,7 @@ export default function ListScreen() {
               )}
               <Text style={styles.status}>{item.status}</Text>
             </View>
-          </View>
+          </TouchableOpacity>
         )}
         ListEmptyComponent={<Text>No cards found. Scan one!</Text>}
       />
