@@ -16,6 +16,11 @@ export const uploadCardScan = async (formData: FormData) => {
     return response.data;
   } catch (error) {
     console.error("Error uploading card scan:", error);
+    console.error("Error uploading card scan:", error);
     throw error;
   }
+};
+export const getCards = async () => {
+  const response = await api.get("/cards");
+  return response.data;
 };

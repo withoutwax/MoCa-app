@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useNotificationSource } from "../hooks/useNotificationSource";
 import { useScanCard } from "../hooks/useScanCard"; // Import to ensure it's used/tested if we add a button
+import { getCards } from "../api/cards";
 
 // const API_URL = 'http://localhost:3000/cards'; // Base URL
 
@@ -36,13 +37,7 @@ export default function ListScreen() {
     refetch,
   } = useQuery({
     queryKey: ["cards"],
-    queryFn: async () => {
-      // return axios.get('http://localhost:3000/cards').then(res => res.data);
-      // Since I didn't explicitly create GET /cards, this might fail.
-      // But the task is focused on Async OCR.
-      // I'll add a simple placeholder list or explanation.
-      return [];
-    },
+    queryFn: getCards,
   });
 
   return (

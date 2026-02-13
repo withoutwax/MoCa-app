@@ -8,12 +8,14 @@ import CameraModal from "../components/CameraModal";
 import { uploadCardScan } from "../api/cards";
 import { useAuthStore } from "../store/useAuthStore";
 import { Alert, View } from "react-native";
+import { useQueryClient } from "@tanstack/react-query";
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomTabNavigator() {
   const [isCameraVisible, setIsCameraVisible] = useState(false);
   const { user } = useAuthStore();
+  const queryClient = useQueryClient();
 
   const handleCapture = async (photo: any) => {
     try {
@@ -35,6 +37,7 @@ export default function BottomTabNavigator() {
       }
 
       await uploadCardScan(formData);
+      await queryClient.invalidateQueries({ queryKey: ["cards"] });
       Alert.alert("Success", "Card uploaded for processing!");
       setIsCameraVisible(false);
     } catch (error) {
